@@ -1,0 +1,62 @@
+{% include "header.html" %}
+
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+    <!-- Hero Section -->
+    <h1 class="display-4 fw-bold text-body-emphasis mb-4">List Creator</h1>
+
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">
+            Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.
+            In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.
+        </p>
+
+        <!-- New List Form -->
+        <form method="POST" action="{{ url_for('add_list') }}" class="mb-5">
+            <div class="input-group input-group-lg mb-3">
+                <input type="text" class="form-control" name="list_name" placeholder="Enter list name..." required>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-2"></i>Create List
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="overflow-hidden" style="max-height: 30vh;">
+        <div class="container px-5">
+            <img
+                src="https://imgs.search.brave.com/BIpKZ-QY6-Wa8HmjNrQv8wj2-g9mQ77Bup6RDF_xWpg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi90by1k/by1saXN0cy1saXN0/LW11bHRpY29sb3Jl/ZC10YXNrLW5vdGVz/LWhhZG5kLWNob29z/aW5nLW9uZS13aGl0/ZS1iYWNrZ3JvdW5k/LTg4MzU3NzUwLmpw/Zw"
+                class="img-fluid border rounded-3 shadow-lg mb-4"
+                alt="Example image"
+                width="700"
+                height="500"
+                loading="lazy">
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <!-- Lists Section -->
+    <div class="container col-lg-8 col-xl-7 mx-auto">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="text-start mb-0">Lists created</h3>
+        </div>
+
+        <div class="list-group">
+            {% for list in all_lists %}
+                <a href="{{url_for('show_list', list_id=list.id)}}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div class="text-start">
+                            <h6 class="mb-0">{{ list.name }}</h6>
+                            <p class="mb-0 opacity-75 small" style="margin-top: 2px;">{{ list.desc }}</p>
+                        </div>
+                        <small class="opacity-50 text-nowrap">{{ list.date }}</small>
+                    </div>
+                </a>
+            {% endfor %}
+            <br><br>
+        </div>
+    </div>
+
+</div>
+
+{% include "footer.html" %}
